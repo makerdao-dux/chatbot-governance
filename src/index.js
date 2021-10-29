@@ -24,7 +24,6 @@ client.on('messageCreate', async message => {
         const polls = await pollsModule.fetchPolls()
         // console.log(JSON.stringify(polls, null, 2))
 
-        await message.channel.send(`Current polls:`);
 
         if (polls.length === 0) {
             await message.channel.send("No active polls right now")
@@ -39,7 +38,7 @@ client.on('messageCreate', async message => {
                 return messagePoll
             }).join('\n')
 
-            await message.channel.send(pollsMessage)
+            await message.channel.send("```css\n"+ pollsMessage+ "```")
         }
 
 
