@@ -19,10 +19,10 @@ module.exports = {
             const pollsMessage = polls.map(item => {
 
                 const results = item.tally.results.map(r => {
-                    return `   - ${r.optionName} - Total MKR ${r.mkrSupport.toFixed(2)}`
+                    return `   - ${r.optionName} - ${r.mkrSupport.toFixed(2)}MKR`
                 }).join('\n')
 
-                const messagePoll = `💡 ${item.poll.title} 🏆 winning option: ${item.tally.winningOptionName}. \n Total MKR participation: ${new BigNumber(item.tally.totalMkrParticipation).toFixed(2)}. \n Total Participants: ${item.tally.numVoters}. \n${results}`
+                const messagePoll = `💡 <a href="https://vote.makerdao.com/polling/${item.poll.slug}">${item.poll.title.length > 200 ? item.poll.title.substring(0, 200) + '...' : item.poll.title}</a> 🏆 1st option: ${item.tally.winningOptionName}.  \n${results}`
                 return messagePoll
             }).join('\n')
             interaction.editReply({ content: '```css\n'+ pollsMessage+ '```', ephemeral: true })
