@@ -12,6 +12,8 @@ module.exports = {
         const key = interaction.options.getString('key');
         
         interaction.reply({ content: 'Getting the changelog...', ephemeral: true })
+        await wait(1000);
+        
         const data = await fetchChangelog(key)
         interaction.editReply({ content: data, ephemeral: true })
 
