@@ -35,6 +35,7 @@ function parseRawPollTally(rawTally, poll) {
     const totalMkrParticipation = new BigNumber(rawTally.totalMkrParticipation);
 
     const winningOptionName = rawTally?.winner === null ? 'None found' : poll.options[rawTally.winner];
+    const winningOptionMKR = new BigNumber(rawTally.options?.[rawTally?.winner]?.mkrSupport || 0)
 
     const rankedChoiceResult = Object.keys(poll.options)
         .map(key => {
@@ -87,7 +88,8 @@ function parseRawPollTally(rawTally, poll) {
         ...rawTally,
         results: poll.voteType === POLL_VOTE_TYPE.PLURALITY_VOTE ? pluralityResult : rankedChoiceResult,
         totalMkrParticipation,
-        winningOptionName
+        winningOptionName,
+        winningOptionMKR
     };
 }
 
