@@ -1,47 +1,81 @@
 require('dotenv').config();
-const pollsModule = require('./polls');
-const { Client } = require('discord.js');
-const { default: BigNumber } = require('bignumber.js');
+const fs = require('fs');
+const path = require('path');
+const {
+    REST
+} = require('@discordjs/rest');
+const {
+    Routes
+} = require('discord-api-types/v9');
+// Require the necessary discord.js classes
+const {
+    Client,
+    Intents,
+    Collection
+} = require('discord.js');
 
-const client = new Client({ intents: ["GUILDS", "GUILD_MESSAGES", "DIRECT_MESSAGES"] });
+// Create a new client instance
+const client = new Client({
+    intents: [Intents.FLAGS.GUILDS]
+});
 
-client.login(process.env.BOT_TOKEN);
-client.on('ready', () => console.log(`${client.user.tag} has logged in.`));
+const commandsPath = path.join(__dirname, 'commands')
+const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
+const BOT_TOKEN = process.env['BOT_TOKEN'];
+const GUILD_ID = process.env['GUILD_ID'];
 
+const commands = [];
 
+// Creating a collection for commands in client
+client.commands = new Collection();
 
-client.on('messageCreate', async message => {
-    // console.log(message.content)
-    if (message.author.bot) {
-        return;
-    }
+for (const file of commandFiles) {
+    const command = require(`${commandsPath}/${file}`);
+    commands.push(command.data.toJSON());
+    client.commands.set(command.data.name, command);
+}
 
-
-
-    if (message.content.toLowerCase() === '!polls') {
-        const response = await message.channel.send("Getting the current polls...")
-
-        const polls = await pollsModule.fetchPolls()
-        // console.log(JSON.stringify(polls, null, 2))
-
-
-        if (polls.length === 0) {
-            await message.channel.send("No active polls right now")
-        } else {
-            const pollsMessage = polls.map(item => {
-
-                const results = item.tally.results.map(r => {
-                    return `   - ${r.optionName} - Total MKR ${r.mkrSupport.toFixed(2)}`
-                }).join('\n')
-
-                const messagePoll = `💡 ${item.poll.title} 🏆 winning option: ${item.tally.winningOptionName}. \n Total MKR participation: ${new BigNumber(item.tally.totalMkrParticipation).toFixed(2)}. \n Total Participants: ${item.tally.numVoters}. \n${results}`
-                return messagePoll
-            }).join('\n')
-
-            await message.channel.send("```css\n"+ pollsMessage+ "```")
+// When the client is ready, this only runs once
+client.once('ready', () => {
+    console.log('Ready!');
+    // Registering the commands in the client
+    const CLIENT_ID = client.user.id;
+    const rest = new REST({
+        version: '9'
+    }).setToken(BOT_TOKEN);
+    (async () => {
+        try {
+            if (!GUILD_ID) {
+                await rest.put(
+                    Routes.applicationCommands(CLIENT_ID), {
+                        body: commands
+                    },
+                );
+                console.log('Successfully registered application commands globally');
+            } else {
+                await rest.put(
+                    Routes.applicationGuildCommands(CLIENT_ID, GUILD_ID), {
+                        body: commands
+                    },
+                );
+                console.log('Successfully registered application commands for development guild');
+            }
+        } catch (error) {
+            if (error) console.error(error);
         }
+    })();
+});
 
-
-        console.log('done')
+client.on('interactionCreate', async interaction => {
+    if (!interaction.isCommand()) return;
+    const command = client.commands.get(interaction.commandName);
+    if (!command) return;
+    try {
+        await command.execute(interaction);
+    } catch (error) {
+        if (error) console.error(error);
+        await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
     }
 });
+
+client.login(BOT_TOKEN);
