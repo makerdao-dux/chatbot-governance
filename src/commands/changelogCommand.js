@@ -15,7 +15,7 @@ module.exports = {
         await wait(1000);
         
         const data = await fetchChangelog(key)
-        interaction.editReply({ content: data, ephemeral: true })
+        interaction.editReply({ content: '```css\n'+ data +  '```', ephemeral: true })
 
         
 
