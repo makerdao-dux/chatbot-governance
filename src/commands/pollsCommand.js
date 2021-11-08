@@ -10,7 +10,7 @@ function getPollsMessage(polls) {
         //     return `   - ${r.optionName} - ${r.mkrSupport.toFixed(2)}MKR`
         // }).join('\n')
 
-        const messagePoll = `- <a href="https://vote.makerdao.com/polling/${item.poll.slug}">${item.poll.title.length > 200 ? item.poll.title.substring(0, 200) + '...' : item.poll.title}</a> 🏆 1st option: ${item.tally.winningOptionName} ${item.tally.winningOptionMKR.toFixed(2)}`
+        const messagePoll = `- ${item.poll.title.length > 200 ? item.poll.title.substring(0, 200) + '...' : item.poll.title} 🏆 1st option: ${item.tally.winningOptionName} ${item.tally.winningOptionMKR.toFixed(2)}`
         return messagePoll
     }).join('\n')
 }
