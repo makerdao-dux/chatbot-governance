@@ -29,11 +29,19 @@ module.exports = {
             interaction.reply({ content: 'No active polls right now', ephemeral: true })
         } else {
             
-            const firstPolls = polls.slice(0, 4);
-            const lastPolls = polls.slice(4, polls.length)
-            const remainingPolls = lastPolls.length > 0 ? `${lastPolls.length} more polls on https://vote.makerdao.com/polling` : ''
-            
-            interaction.editReply({ content: '```css\n'+ getPollsMessage(firstPolls) + remainingPolls +  '```', ephemeral: true })
+            const pollsSplit = [], size = 4;
+    
+            while (polls.length > 0) {
+                pollsSplit.push(polls.splice(0, size));
+            }
+
+            for(var i = 0; i < pollsSplit.length; i++) {
+                if (i === 0) {
+                    interaction.editReply({ content: '```css\n'+ getPollsMessage(pollsSplit[i])  +  '```', ephemeral: true })
+                } else {
+                    interaction.followUp({ content: '```css\n'+ getPollsMessage(pollsSplit[i])  +  '```', ephemeral: true })
+                }
+            }
         }
 
 
