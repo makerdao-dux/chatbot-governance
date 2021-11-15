@@ -16,7 +16,7 @@ const {
 
 // Create a new client instance
 const client = new Client({
-    intents: [Intents.FLAGS.GUILDS]
+    intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MEMBERS, Intents.FLAGS.GUILD_INTEGRATIONS, Intents.FLAGS.GUILD_PRESENCES]
 });
 
 const commandsPath = path.join(__dirname, 'commands')
