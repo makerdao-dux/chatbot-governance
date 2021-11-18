@@ -37,7 +37,7 @@ module.exports = {
 	  var members = []
 	  role.members.forEach(function(member) {
 	    const isFacilitator = member.roles.cache.some(role => role.name.endsWith('Facilitator'))
-	    var member = '- '+member.user.username+' <@'+member.id+'> '
+	    var member = '- '+member.user.username+' <@!'+member.id+'> '
 	    if (isFacilitator) {
 	       member += ':crown:'
 	    }
