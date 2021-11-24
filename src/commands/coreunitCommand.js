@@ -26,6 +26,9 @@ module.exports = {
 			['SNE-001: Starknet Engineering', 'Starknet Engineering'],
 			['MDS-001: MakerDAO Shop', 'MakerDAO Shop'],
 			['DIN-001: Data Insights', 'Data Insights'],
+			['SAS-001: Sidestream Auction Services', 'Sidestream Auction Services'],
+			['IS-001: Immunefi Security', 'Immunefi Security'],
+			['DECO-001:  Deco Fixed Rate', 'Deco Fixed Rate'],
 		]),
         ),
     async execute(interaction) {
