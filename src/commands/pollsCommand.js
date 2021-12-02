@@ -26,7 +26,7 @@ module.exports = {
 
 
         if (polls.length === 0) {
-            interaction.reply({ content: 'No active polls right now', ephemeral: true })
+            interaction.editReply({ content: 'No active polls right now', ephemeral: true })
         } else {
             
             const pollsSplit = [], size = 4;
