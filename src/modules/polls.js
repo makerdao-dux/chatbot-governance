@@ -23,7 +23,13 @@ function fetchPollTally(poll) {
     const url = getPollTallyUrl(poll)
     return axios.get(url)
         .then(resp => {
-            return resp.data
+            const tally =  resp.data
+            const winningOptionMKR = new BigNumber(tally.options?.[tally?.winner]?.mkrSupport || 0)
+
+            return {
+                ...tally,
+                winningOptionMKR
+            }
         })
 }
 
