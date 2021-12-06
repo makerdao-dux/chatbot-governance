@@ -1,4 +1,5 @@
 const { default: axios } = require("axios");
+const { default: BigNumber } = require('bignumber.js');
 
 function fetchPolls() {
     return axios.get('https://vote.makerdao.com/api/polling/all-polls')
