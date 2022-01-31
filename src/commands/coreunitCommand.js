@@ -29,6 +29,8 @@ module.exports = {
 			['SAS-001: Sidestream Auction Services', 'Sidestream Auction Services'],
 			['IS-001: Immunefi Security', 'Immunefi Security'],
 			['DECO-001:  Deco Fixed Rate', 'Deco Fixed Rate'],
+			['TECH-001:  TechOps', 'Tech Ops'],
+			['SF-001:  Strategic Finance', 'Strategic Finance'],
 		]),
         ),
     async execute(interaction) {
