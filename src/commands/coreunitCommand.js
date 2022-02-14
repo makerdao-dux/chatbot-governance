@@ -11,7 +11,6 @@ module.exports = {
 		.setDescription('Core Unit name')
 		.addChoices([
 			['CES-001: Collateral Engineering', 'Collateral Engineering Services'],
-			['MKT-001: Content Production', 'Content Production'],
 			['DAIF-001: Dai Foundation', 'Dai Foundation'],
 			['DUX-001: Development and UX', 'Development & UX'],
 			['GOV-001: GovAlpha', 'GovAlpha'],
