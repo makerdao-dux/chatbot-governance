@@ -13,7 +13,7 @@ module.exports = {
 			['CES-001: Collateral Engineering', 'Collateral Engineering Services'],
 			['COM-001: Governance Communications', 'Governance Communications'],
 			['DAIF-001: Dai Foundation', 'Dai Foundation'],
-			['DECO-001:  Deco Fixed Rate', 'Deco Fixed Rate'],
+			['DECO-001: Deco Fixed Rate', 'Deco Fixed Rate'],
 			['DIN-001: Data Insights', 'Data Insights'],
 			['DUX-001: Development and UX', 'Development & UX'],
 			['EVENTS-001: Events Core Unit', 'Events Core Unit'],
