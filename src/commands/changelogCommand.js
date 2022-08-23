@@ -6,6 +6,6 @@ module.exports = {
         .setName('changelog')
         .setDescription('Replies with chainlog'),
     async execute(interaction) {
-        return interaction.reply({ embeds: [{"title": 'MakerDAO Changelog', "description": 'https://chainlog.makerdao.com/', "color": 15258703}], ephemeral: true })
+        return interaction.reply({ embeds: [{"title": 'MakerDAO Chainlog', "description": 'https://chainlog.makerdao.com/', "color": 15258703}], ephemeral: true })
     }
 };
