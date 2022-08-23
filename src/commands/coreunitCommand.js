@@ -27,7 +27,7 @@ module.exports = {
 			['RWF-001: Real World Finance', 'Real World Finance'],
 			['SAS-001: Sidestream Auction Services', 'Sidestream Auction Services'],
 			['SES-001: Sustainable Ecosystem Scaling', 'Sustainable Ecosystem Scaling'],
-			['SF-001:  Strategic Finance', 'Strategic Finance'],
+			['SF-001: Strategic Finance', 'Strategic Finance'],
 			['SH-001: Strategic Happiness', 'Strategic Happiness'],
 			['SNE-001: Starknet Engineering', 'Starknet Engineering'],
 			['TECH-001:  TechOps', 'Tech Ops'],
