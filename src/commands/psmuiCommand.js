@@ -5,6 +5,6 @@ module.exports = {
         .setName('psm-ui')
         .setDescription('Retrieve link to PSM UI'),
     async execute(interaction) {
-        return interaction.reply({ embeds: [{"title": 'PSM UI', "description": 'https://bah5qcgza6fwctkmylpiqa2tg6iwjk4nzgynbah5u3sfclhaztncnguitcwya.bzz.link/', "color": 15258703}], ephemeral: true })
+        return interaction.reply({ embeds: [{"title": 'PSM UI on IPFS', "description": 'https://ipfs.io/ipfs/QmdFEcowhVbEabe68LMH8UuXweU8jnmQ7J28uUhFeeaY9X/', "color": 15258703}], ephemeral: true })
     }
 };
