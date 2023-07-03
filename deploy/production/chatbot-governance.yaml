@@ -26,11 +26,11 @@ autoscaling:
 env:
   BOT_TOKEN:
     type: parameterStore
-    name: github-token
+    name: bot-token
     parameter_name: /eks/maker-prod/chatbot-governance/bot-token
   GUILD_ID:
     type: parameterStore
-    name: github-token
+    name: guild-id
     parameter_name: /eks/maker-prod/chatbot-governance/guild-id
 externalSecrets:
   clusterSecretStoreName: maker-prod
