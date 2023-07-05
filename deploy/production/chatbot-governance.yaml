@@ -1,0 +1,52 @@
+replicaCount: 1
+service:
+  name: chatbot-governance
+  port: 8080
+  type: ClusterIP
+  containerPort: 8080
+  tls:
+    enabled: false
+image:
+  pullPolicy: Always
+serviceAccount:
+  create: false
+ingress:
+  enabled: false
+podAnnotations:
+  reloader.stakater.com/auto: "true"
+resources:
+  limits:
+    cpu: 500m
+    memory: 1024Mi
+  requests:
+    cpu: 250m
+    memory: 512Mi
+autoscaling:
+  enabled: false
+env:
+  BOT_TOKEN:
+    type: parameterStore
+    name: bot-token
+    parameter_name: /eks/maker-prod/chatbot-governance/bot-token
+  GUILD_ID:
+    type: parameterStore
+    name: guild-id
+    parameter_name: /eks/maker-prod/chatbot-governance/guild-id
+externalSecrets:
+  clusterSecretStoreName: maker-prod
+livenessProbe:
+  exec:
+    command:
+      - /bin/sh
+      - -c
+      - ps -ef | grep node | grep src/index.js
+  initialDelaySeconds: 5
+  periodSeconds: 30
+readinessProbe:
+  exec:
+    command:
+      - /bin/sh
+      - -c
+      - ps -ef | grep node | grep src/index.js
+  initialDelaySeconds: 5
+  periodSeconds: 30
